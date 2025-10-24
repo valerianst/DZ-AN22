@@ -1,0 +1,68 @@
+//Задание 3
+fun main() {
+    
+    try {
+        print("Введите строку: ")
+        val input = readLine()
+
+        if (input.isNullOrEmpty()) {
+            throw IllegalArgumentException("Строка не может быть пустой!")
+        }
+
+        println("Вы ввели: '$input'")
+        println("Длина строки: ${input.length} символов")
+
+    } catch (e: IllegalArgumentException) {
+        println("Ошибка: ${e.message}")
+    }
+}
+import java.util.InputMismatchException
+import java.util.Scanner
+
+//Задание 1
+fun main() {
+    val scanner = Scanner(System.`in`)
+
+    try {
+        print("Введите первое число: ")
+        val num1 = scanner.nextDouble()
+
+        print("Введите второе число: ")
+        val num2 = scanner.nextDouble()
+
+        if (num2 == 0.0) {
+            throw ArithmeticException("Деление на ноль!")
+        }
+
+        val result = num1 / num2
+        println("Результат: $num1 / $num2 = $result")
+
+    } catch (e: InputMismatchException) {
+        println("Ошибка: Введено не число! Пожалуйста, вводите только числа.")
+    } catch (e: ArithmeticException) {
+        println("Ошибка: ${e.message}")
+    } finally {
+        scanner.nextLine() // Очистка буфера
+    }
+}
+class TooYoungException(message: String) : Exception(message)
+
+//Задание 2
+fun main () {
+
+    try {
+        print("Введите ваш возраст: ")
+        val age = readLine()?.toInt() ?: throw NumberFormatException("Возраст должен быть числом")
+
+        if (age < 18) {
+            throw TooYoungException("Доступ запрещен! Возраст должен быть 18 лет или старше.")
+        }
+
+        println("Доступ разрешен! Ваш возраст: $age")
+
+    } catch (e: NumberFormatException) {
+        println("Ошибка: ${e.message}")
+    } catch (e: TooYoungException) {
+        println("Ошибка: ${e.message}")
+    }
+}
