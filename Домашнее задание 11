@@ -1,0 +1,94 @@
+//Задание 2
+import java.util.LinkedList
+
+fun main() {
+
+    // Создаем первый отсортированный список
+    val list1 = LinkedList<Int>()
+    list1.add(1)
+    list1.add(3)
+    list1.add(5)
+    list1.add(7)
+    list1.add(9)
+
+    // Создаем второй отсортированный список
+    val list2 = LinkedList<Int>()
+    list2.add(2)
+    list2.add(4)
+    list2.add(6)
+    list2.add(8)
+    list2.add(10)
+
+    println("Первый список: $list1")
+    println("Второй список: $list2")
+
+    // Вызываем функцию слияния
+    val mergedList = mergeSortedLists(list1, list2)
+
+    println("Результат слияния: $mergedList")
+    println("Размер итогового списка: ${mergedList.size}")
+}
+
+fun mergeSortedLists(list1: LinkedList<Int>, list2: LinkedList<Int>): LinkedList<Int> {
+    val result = LinkedList<Int>()
+    var i = 0
+    var j = 0
+
+    // Сливаем списки, пока не дойдем до конца одного из них
+    while (i < list1.size && j < list2.size) {
+        val element1 = list1[i]
+        val element2 = list2[j]
+
+        if (element1 <= element2) {
+            result.add(element1)
+            i++
+        } else {
+            result.add(element2)
+            j++
+        }
+    }
+
+    // Добавляем оставшиеся элементы из первого списка
+    while (i < list1.size) {
+        result.add(list1[i])
+        i++
+    }
+
+    // Добавляем оставшиеся элементы из второго списка
+    while (j < list2.size) {
+        result.add(list2[j])
+        j++
+    }
+
+    return result
+}
+
+//Задание 1
+import java.util.LinkedList
+
+
+fun main () {
+
+    val people = LinkedList<Int>()
+
+    // Заполняем список людьми от 1 до n
+    val n = 6
+    for (i in 1..n) {
+        people.add(i)
+    }
+
+    var currentIndex = 0
+    while (people.size > 1) {
+        // Вычисляем индекс следующего человека для удаления (каждый 2-й)
+        currentIndex = (currentIndex + 1) % people.size
+
+        // Удаляем человека
+        val removed = people.removeAt(currentIndex)
+        println("Выбывает: $removed. Осталось: $people")
+
+        // Если удалили последнего, начинаем с начала
+        if (currentIndex == people.size) {
+            currentIndex = 0
+        }
+    }
+}
